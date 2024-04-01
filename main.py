@@ -112,7 +112,7 @@ def calculate_meals(height, weight, health_status):
             "image": "dinner_image.jpg",
         },
     ]
-    # Randomly select meals from the database for demonstration
+    
     random.shuffle(meals_database)
     for meal in meals_database[:3]:  # Let's say we suggest 3 meals
         suggested_meals.append((meal["name"], meal["description"], meal["image"]))
