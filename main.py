@@ -6,7 +6,7 @@ from ttkbootstrap.validation import add_regex_validation
 import random
 from PIL import Image, ImageTk
 
-Hello 
+print ("Them xin chao !")
 class NutritionManager(ttk.Frame):
     def __init__(self, master_window):
         super().__init__(master_window, padding=(20, 10))
