@@ -6,7 +6,7 @@ import random
 import os
 from gtts import gTTS
 from playsound import playsound
-
+from tkinter import messagebox
 
 class NutritionManager(ttk.Frame):
     def __init__(self, master_window):
@@ -80,6 +80,12 @@ class NutritionManager(ttk.Frame):
         weight = self.weight.get()
         health_status = self.health_status.get()
 
+        # Kiểm tra xem health_status có phải là chữ số không
+        if self.is_number(health_status):
+            # Nếu là chữ số, hiển thị cảnh báo và không thực hiện tính toán
+            messagebox.showwarning("Cảnh báo", "Tình trạng sức khỏe không thể là một số.")
+            return
+
         # Tính toán bữa ăn gợi ý dựa trên chiều cao, cân nặng và tình trạng sức khỏe
         suggested_meals = calculate_meals(height, weight, health_status)
 
@@ -107,6 +113,13 @@ class NutritionManager(ttk.Frame):
             tts_meal.save("voice_meal.mp3")
             playsound("voice_meal.mp3")
             os.remove("voice_meal.mp3")
+
+    def is_number(self, s):
+        try:
+            float(s)
+            return True
+        except ValueError:
+            return False
 
 
 def calculate_meals(height, weight, health_status):
@@ -234,9 +247,6 @@ def calculate_meals(height, weight, health_status):
         suggested_meals.extend([(meal["name"], meal["description"], meal["image"]) for meal in high_cholesterol_meals])
     
     return suggested_meals
-
-
-
 
 
 def load_image(image_path, size=(100, 100)):
