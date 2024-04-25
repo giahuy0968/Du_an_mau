@@ -111,7 +111,7 @@ def calculate_meals(height, weight, health_status):
             "image": "dinner_image.jpg",
         },
     ]
-    
+
     random.shuffle(meals_database)
     for meal in meals_database[:3]:  # Let's say we suggest 3 meals
         suggested_meals.append((meal["name"], meal["description"], meal["image"]))
@@ -120,20 +120,19 @@ def calculate_meals(height, weight, health_status):
 
 def load_image(image_path, size=(100, 100)):
     """Load and resize an image."""
-    image = Image.open("anh_co_the.jpg")
+    image = Image.open(image_path)
     image = image.resize(size, Image.ANTIALIAS)  # Resize image to specified size
     photo = ImageTk.PhotoImage(image)
     return photo
 
 
 if __name__ == "__main__":
-    app = ttk.Window("Nutrition Manager", "superhero", resizable=(False, False))
+    app = ttk.Window("Nutrition Manager", "vapor", resizable=(False, False))
     nutrition_manager = NutritionManager(app)
 
     # Load and display images in the table
-    for i, (anh_chuc_nang, description, image_path) in enumerate(
-        nutrition_manager.data
-    ):
-        image = load_image("anh_co_the.jpg")
+    for i, (meal, description, image_path) in enumerate(nutrition_manager.data):
+        image_path = r"D:\Du_an_mau\anh_co_the.jpg"  # Thay đổi đường dẫn tại đây
+        image = load_image(image_path)
         nutrition_manager.table.set_image(i, 2, image)
     app.mainloop()
